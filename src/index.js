@@ -1,13 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import Loader from "./components/Loader";
+import "./index.css";
+import { store } from "./redux/store";
+import reportWebVitals from "./reportWebVitals";
+import Routes from "./routes";
+import "./theme.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const cid2 =
+  "34432485904-e2glgmvbpp95v1ugbg3bjp27spteiud2.apps.googleusercontent.com";
+
 root.render(
   <React.StrictMode>
-    <App />
+    <GoogleOAuthProvider clientId={cid2}>
+      <Provider store={store}>
+        <Suspense fallback={<Loader show />}>
+          <Routes />
+        </Suspense>
+      </Provider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
 
