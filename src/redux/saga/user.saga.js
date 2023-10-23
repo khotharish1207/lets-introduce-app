@@ -15,7 +15,7 @@ function* getUserSaga({ payload }) {
 
     const config = {
       method: "POST",
-      url: "http://localhost:5000/user/find-and-update",
+      url: `${process.env.API_URL}/user/find-and-update`,
       data: { ...payload },
     };
 

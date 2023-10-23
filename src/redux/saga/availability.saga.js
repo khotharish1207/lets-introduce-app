@@ -8,7 +8,7 @@ function* handler({ payload }) {
     put(setLoading(true));
     const config = {
       method: "GET",
-      url: `http://localhost:5000/site/verify-endpoint/${payload}`,
+      url: `${process.env.API_URL}/site/verify-endpoint/${payload}`,
     };
 
     const { data } = yield call(axios, config);

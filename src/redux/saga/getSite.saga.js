@@ -14,7 +14,7 @@ function* handler({ payload }) {
 
     const config = {
       method: "GET",
-      url: `http://localhost:5000/site/find/${payload}`,
+      url: `${process.env.API_URL}/site/find/${payload}`,
     };
 
     const { data } = yield call(axios, config);

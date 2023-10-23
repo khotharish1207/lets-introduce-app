@@ -22,7 +22,7 @@ function* handler(action) {
     };
     const config = {
       method: "PATCH",
-      url: `http://localhost:5000/site/update/${id}`,
+      url: `${process.env.API_URL}/site/update/${id}`,
       headers: {
         "x-auth-credential": user?.credential,
       },
