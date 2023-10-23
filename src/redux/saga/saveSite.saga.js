@@ -2,6 +2,7 @@ import axios from "axios";
 import { call, select, takeLatest, put } from "redux-saga/effects";
 import { saveSite } from "../reducer/site.reducer";
 import { setLoading } from "../reducer/app.reducer";
+import { API_URL } from "../../constants/appConstants";
 
 function* handler(action) {
   try {
@@ -22,7 +23,7 @@ function* handler(action) {
     };
     const config = {
       method: "PATCH",
-      url: `${process.env.API_URL}/site/update/${id}`,
+      url: `${API_URL}/site/update/${id}`,
       headers: {
         "x-auth-credential": user?.credential,
       },

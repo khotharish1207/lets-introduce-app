@@ -653,3 +653,5 @@ export default {
   scrollPos: null,
   opening: false,
 };
+
+export const API_URL = "https://lets-introduce-server.onrender.com";

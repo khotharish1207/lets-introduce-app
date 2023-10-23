@@ -7,6 +7,7 @@ import { setImages } from "../reducer/images.reducer";
 import { setInitialSite, getSite } from "../reducer/site.reducer";
 import { setInitialFeatures } from "../reducer/feature.reducer";
 import { setLoading } from "../reducer/app.reducer";
+import { API_URL } from "../../constants/appConstants";
 
 function* handler({ payload }) {
   try {
@@ -14,7 +15,7 @@ function* handler({ payload }) {
 
     const config = {
       method: "GET",
-      url: `${process.env.API_URL}/site/find/${payload}`,
+      url: `${API_URL}/site/find/${payload}`,
     };
 
     const { data } = yield call(axios, config);

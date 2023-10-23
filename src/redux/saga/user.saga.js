@@ -8,6 +8,7 @@ import { setImages } from "../reducer/images.reducer";
 import { setInitialSite } from "../reducer/site.reducer";
 import { setInitialFeatures } from "../reducer/feature.reducer";
 import { setLoading } from "../reducer/app.reducer";
+import { API_URL } from "../../constants/appConstants";
 
 function* getUserSaga({ payload }) {
   try {
@@ -15,7 +16,7 @@ function* getUserSaga({ payload }) {
 
     const config = {
       method: "POST",
-      url: `${process.env.API_URL}/user/find-and-update`,
+      url: `${API_URL}/user/find-and-update`,
       data: { ...payload },
     };
 
