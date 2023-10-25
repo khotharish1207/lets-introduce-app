@@ -1,4 +1,4 @@
-export default {
+const app_data = {
   downloadCheckList: [
     {
       label:
@@ -653,5 +653,6 @@ export default {
   scrollPos: null,
   opening: false,
 };
-
 export const API_URL = "https://lets-introduce-server.onrender.com";
+
+export default app_data;

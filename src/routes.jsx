@@ -9,12 +9,14 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loader from "./components/Loader";
+import NavBar from "./components/NavBar";
 
 const App = React.lazy(() => import("./App"));
 const Preview = React.lazy(() => import("./preview/Preview"));
 const Login = React.lazy(() => import("./auth/Login"));
 const PageNotFound = React.lazy(() => import("./components/PageNotFound"));
 const Site = React.lazy(() => import("./components/Site"));
+const Dashboard = React.lazy(() => import("./dashboard/Dashboard"));
 
 const PrivateRoutes = () => {
   const location = useLocation();
@@ -25,7 +27,10 @@ const PrivateRoutes = () => {
   }
 
   return user ? (
-    <Outlet />
+    <div>
+      <NavBar />
+      <Outlet />
+    </div>
   ) : (
     <Navigate to="/login" replace state={{ from: location }} />
   );
@@ -33,14 +38,15 @@ const PrivateRoutes = () => {
 
 const AppRoutes = () => {
   const { loading } = useSelector((state) => state.app);
+  console.log("loading..", loading);
   return (
     <BrowserRouter>
       <Loader show={loading} />
       <Routes>
-        {/* <Route path="/app" element={<App />} /> */}
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/" element={<PrivateRoutes />}>
-          <Route path="/" element={<Preview />} />
-          <Route path="/app" element={<App />} />
+          <Route index path="/dashboard" element={<Dashboard />} />
+          <Route path="/editor" element={<App />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/:site" element={<Site />} />

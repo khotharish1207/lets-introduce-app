@@ -6,7 +6,7 @@ import { API_URL } from "../../constants/appConstants";
 
 function* handler({ payload }) {
   try {
-    put(setLoading(true));
+    yield put(setLoading(true));
     const config = {
       method: "GET",
       url: `${API_URL}/site/verify-endpoint/${payload}`,
@@ -21,9 +21,9 @@ function* handler({ payload }) {
         value: data["available-to-use"],
       })
     );
-    put(setLoading(false));
+    yield put(setLoading(false));
   } catch (e) {
-    put(setLoading(false));
+    yield put(setLoading(false));
   }
 }
 

@@ -93,6 +93,23 @@ export const stripAttr = (val) => {
   return null;
 };
 
-export const sharingPage = () => {
-  
+export const sharingPage = () => {};
+
+export const getGreetMsg = () => {
+  var hours = new Date().getHours();
+
+  switch (true) {
+    case hours >= 5 && hours <= 11:
+      return `Hello! Good Morning! Have a nice day`;
+    case hours == 12:
+      return "Good Noon Visitor!";
+    case hours >= 13 && hours <= 17:
+      return "Good Afternoon!";
+    case hours >= 18 && hours <= 20:
+      return "Good Evening!";
+    case hours >= 21 && hours <= 11:
+      return "Good Night!";
+    default:
+      return "Wow! You`re still awake. Working Late?";
+  }
 };

@@ -24,7 +24,7 @@ export default function Login() {
       })
     );
 
-    navigate("/app");
+    navigate("/dashboard");
   };
   const errorMessage = (error) => {
     console.log(error);
@@ -45,19 +45,27 @@ export default function Login() {
             <div class="w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12">
               <div class="px-6 py-12 md:px-12">
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Boost your productivity.
-                  <br />
-                  Start using our app today.
+                  Welcome to <b className="text-blue-500">let's Introduce</b>,
+                  where we bring your online presence to life!
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-300">
-                  Ac euismod vel sit maecenas id pellentesque eu sed
-                  consectetur. Malesuada adipiscing sagittis vel nulla.
+                  Are you looking to create a stunning personal website that
+                  reflects your unique identity and sets you apart from the
+                  rest? Look no further! Our professional web design experience
+                  is here to help you make a lasting impression online.
+                </p>
+                <p className="mt-6 text-lg leading-8 text-gray-300">
+                  Ready to shine online? Take the first step towards creating an
+                  impressive personal website that truly represents you. Let our
+                  team at PersonalWeb handle the design process while you focus
+                  on what you do best. Get in touch with us today to discuss
+                  your project and let us bring your vision to life!
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                   <GoogleLogin
                     onSuccess={responseMessage}
                     onError={errorMessage}
-                    auto_select
+                    // auto_select
                     useOneTap
                     itp_support
                     flow="auth-code"

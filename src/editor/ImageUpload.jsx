@@ -45,7 +45,6 @@ const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
       (dropped && e.dataTransfer.files.length) ||
       (!dropped && e.target.files.length)
     ) {
-      console.log(e.target.files);
       let file = dropped ? e.dataTransfer.files[0] : e.target.files[0];
       let mime = file.type;
       if (

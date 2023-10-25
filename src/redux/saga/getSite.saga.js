@@ -11,7 +11,7 @@ import { API_URL } from "../../constants/appConstants";
 
 function* handler({ payload }) {
   try {
-    put(setLoading(true));
+    yield put(setLoading(true));
 
     const config = {
       method: "GET",
@@ -42,12 +42,10 @@ function* handler({ payload }) {
       );
       yield put(setInitialFeatures(feature));
     }
-
-    console.log("user response", data);
-    put(setLoading(false));
+    yield put(setLoading(false));
   } catch (e) {
     console.log("error", e);
-    put(setLoading(false));
+    yield put(setLoading(false));
   }
 }
 

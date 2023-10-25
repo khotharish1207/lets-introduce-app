@@ -6,7 +6,7 @@ import { API_URL } from "../../constants/appConstants";
 
 function* handler(action) {
   try {
-    put(setLoading(true));
+    yield put(setLoading(true));
 
     const {
       site: { id, endpoint },
@@ -38,11 +38,9 @@ function* handler(action) {
     };
 
     const { data } = yield call(axios, config);
-
-    console.log(data);
-    put(setLoading(false));
+    yield put(setLoading(false));
   } catch (e) {
-    put(setLoading(false));
+    yield put(setLoading(false));
   }
 }
 
