@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Preview from "../preview/Preview";
@@ -9,7 +9,9 @@ const Site = () => {
   const dispatch = useDispatch();
   const { site } = useParams();
 
-  dispatch(getSite(site));
+  useEffect(() => {
+    dispatch(getSite(site));
+  }, []);
 
   return <Preview />;
 };

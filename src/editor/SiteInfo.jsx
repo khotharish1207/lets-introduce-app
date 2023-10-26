@@ -24,14 +24,12 @@ const SiteInfo = () => {
           type="text"
           onChange={(e) => setEndPoint(e.target.value)}
           value={endPoint}
-          //   onChange={onChange("endpoint")}
-          //   value={site["endpoint"]}
           placeholder="website url"
           autocapitalize="words"
           className="mt-2 px-4 w-full h-12 bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 hover:border-gray-600"
         />
         <p class="mt-2 text-gray-400">
-          Your site is published at{" "}
+          Your site will be publish after saving at{" "}
           <a
             className=" text-sky-700 "
             href={`${window.location.origin}/${endPoint}`}

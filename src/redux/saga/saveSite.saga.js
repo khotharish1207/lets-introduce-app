@@ -2,14 +2,14 @@ import axios from "axios";
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { API_URL } from "../../constants/appConstants";
 import { setLoading } from "../reducer/app.reducer";
-import { saveSite, getSite } from "../reducer/site.reducer";
+import { saveSite, getSite, setSite } from "../reducer/site.reducer";
 
 function* handler(action) {
   try {
     yield put(setLoading(true));
 
     const {
-      site: { id, endpoint },
+      site: { id, endpoint, endpointDirty },
       contactInformation,
       pageDesign,
       actionItems,
@@ -32,13 +32,23 @@ function* handler(action) {
         contactInformation,
         pageDesign,
         actionItems,
-        endpoint,
+        endpoint: endpointDirty || endpoint,
         images: getImages(),
         feature,
       },
     };
 
     const { data } = yield call(axios, config);
+
+    if (!endpoint) {
+      yield put(
+        setSite({
+          key: "endpoint",
+          value: endpointDirty || endpoint,
+        })
+      );
+    }
+    
     if (data?.id) {
       yield put(getSite(data?.id));
     }

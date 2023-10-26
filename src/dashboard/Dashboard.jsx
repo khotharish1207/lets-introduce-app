@@ -6,6 +6,7 @@ import { getGreetMsg } from "../utils/index";
 export default function Dashboard() {
   const navigate = useNavigate();
   const { site, app } = useSelector((state) => state);
+  const siteAvailable = site?.endpoint || site?.id;
 
   return (
     <div className="relative isolate h-screen overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -27,14 +28,14 @@ export default function Dashboard() {
               exceptional online site hosting experience tailored just for you.
             </p>
 
-            {site?.endpoint ? (
+            {site?.endpoint || site?.id ? (
               <p className="mt-6 text-xl leading-8 text-gray-400">
                 Your site is published at{" "}
                 <a
                   className="text-blue-500"
-                  href={`${window.location.origin}/${site?.endpoint}`}
+                  href={`${window.location.origin}/${siteAvailable}`}
                   target="_blank"
-                >{`${window.location.origin}/${site?.endpoint}`}</a>
+                >{`${window.location.origin}/${siteAvailable}`}</a>
               </p>
             ) : (
               <p className="mt-6 text-xl leading-8 text-gray-400">
@@ -47,7 +48,7 @@ export default function Dashboard() {
                 onClick={() => navigate("/editor")}
                 class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {site?.endpoint ? "Edit Site" : "Create site"}
+                {siteAvailable ? "Edit Site" : "Create site"}
               </button>
             </div>
           </div>
