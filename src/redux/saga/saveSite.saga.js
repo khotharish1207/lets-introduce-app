@@ -1,8 +1,8 @@
 import axios from "axios";
-import { call, select, takeLatest, put } from "redux-saga/effects";
-import { saveSite } from "../reducer/site.reducer";
-import { setLoading } from "../reducer/app.reducer";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { API_URL } from "../../constants/appConstants";
+import { setLoading } from "../reducer/app.reducer";
+import { saveSite, getSite } from "../reducer/site.reducer";
 
 function* handler(action) {
   try {
@@ -21,9 +21,10 @@ function* handler(action) {
     const getImages = () => {
       return Object.keys(images).map((name) => ({ name, ...images[name] }));
     };
+
     const config = {
-      method: "PATCH",
-      url: `${API_URL}/site/update/${id}`,
+      method: id ? "PATCH" : "POST",
+      url: id ? `${API_URL}/site/update/${id}` : `${API_URL}/site/create-new`,
       headers: {
         "x-auth-credential": user?.credential,
       },
@@ -38,6 +39,9 @@ function* handler(action) {
     };
 
     const { data } = yield call(axios, config);
+    if (data?.id) {
+      yield put(getSite(data?.id));
+    }
     yield put(setLoading(false));
   } catch (e) {
     yield put(setLoading(false));

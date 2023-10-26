@@ -2,7 +2,7 @@ import React from "react";
 
 const Action = ({ item, type, buttonBg, onChange, removeAction }) => {
   return (
-    <div className="stepC flex mt-6">
+    <div className="stepC flex mt-6 mb-4">
       <button
         className="py-1 pr-1 shrink-0 focus:outline-none drag cursor-move"
         tabindex="-1"

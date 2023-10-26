@@ -106,7 +106,7 @@ const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
   };
 
   return (
-    <div class="flex mt-6">
+    <div class="flex my-6">
       <transition name="list">
         {/* {showCropper && (
           <ReactCrop

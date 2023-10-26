@@ -18,7 +18,7 @@ const ContactInformation = () => {
     );
 
   return (
-    <div id="step-2" class="mt-16">
+    <div id="step-2" class="my-8">
       <h2 class="font-extrabold text-2xl">Contact information</h2>
       <ImageUpload
         type="photo"

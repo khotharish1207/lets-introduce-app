@@ -10,9 +10,9 @@ export default function App() {
     <>
       <div className="bg-gray-900 md:grid md:grid-cols-2 md:gap-x-1.5">
         <div>
-          <div className="fixed top-0 w-full z-30 bg-gray-900 justify-between items-center flex md:hidden">
+          <div className="w-full z-30 bg-gray-900 justify-between items-center flex md:hidden">
             <div className="logo w-16 m-4">
-              <img src={require("./assets/icons/logo.svg?include").default} />
+              <img src={require("./assets/icons/drag.svg?include").default} />
             </div>
             <button
               className={`p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none ${

@@ -13,9 +13,9 @@ const SiteInfo = () => {
   };
 
   return (
-    <div id="step-2" className="mt-16">
+    <div id="step-2" class="pt-8 mb-4">
       <div className="stepC mt-6">
-        <label for="endpoint" className="ml-4">
+        <label for="endpoint" class="font-extrabold text-2xl">
           Your site visible at
         </label>
         <input

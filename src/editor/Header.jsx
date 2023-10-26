@@ -3,7 +3,7 @@ import ImageUpload from "./ImageUpload";
 
 const Header = () => {
   return (
-    <div id="step-1" class="pt-8">
+    <div id="step-1" className="my-8">
       <h2 class="font-extrabold text-2xl">Header attachments</h2>
       <div class="stepC">
         <ImageUpload

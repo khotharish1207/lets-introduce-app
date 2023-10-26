@@ -151,7 +151,7 @@ const FeatureItem = ({
   const addLink = () => addContent("");
 
   return (
-    <div className="flex flex-col w-full mt-6 bg-gray-800 rounded">
+    <div className="flex flex-col w-full my-6 bg-gray-800 rounded">
       <div className="flex justify-between">
         <div className="flex items-center w-full">
           <div

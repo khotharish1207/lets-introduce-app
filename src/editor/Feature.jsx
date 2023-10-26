@@ -37,7 +37,7 @@ const Feature = () => {
     );
 
   return (
-    <div id="step-5" class="mt-16">
+    <div id="step-5" class="my-8">
       <h2 class="font-extrabold text-2xl">Featured content</h2>
       <div class="stepC">
         {feature.map((item, index) => (

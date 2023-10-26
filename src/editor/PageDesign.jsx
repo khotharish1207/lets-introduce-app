@@ -33,7 +33,7 @@ const PageDesign = () => {
 
   return (
     <React.Fragment>
-      <div id="step-8" className="mt-16">
+      <div id="step-8" className="my-8">
         <h2 className="font-extrabold text-2xl">Colours</h2>
         <ColorPicker
           name="logoBg"
