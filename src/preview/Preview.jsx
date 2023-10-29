@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
+import vCardsJS from "vcards-js";
 import { getHref, hasLightBG, stripAttr } from "../utils";
 
 const Preview = () => {
@@ -23,7 +24,19 @@ const Preview = () => {
     return (fn + ln).length ? `${fn ? fn : ""}${ln ? " " + ln : ""}` : null;
   };
 
-  const downloadVcard = () => {};
+  const downloadVcard = () => {
+    const vCard = vCardsJS();
+    const { fname, lname } = contactInformation;
+    const mobile = primaryActions.find(
+      (a) => a.name === "Mobile" || a.name === "Office"
+    );
+
+    vCard.firstName = fname;
+    vCard.lastName = lname;
+    vCard.workPhone = mobile?.value;
+
+    vCard.saveToFile(`./${getFullName()}.vcf`);
+  };
 
   const sharingPage = () => {
     const title = `Let's Introduce ${getFullName()}`;
