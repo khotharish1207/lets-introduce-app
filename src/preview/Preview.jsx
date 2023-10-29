@@ -23,9 +23,7 @@ const Preview = () => {
     return (fn + ln).length ? `${fn ? fn : ""}${ln ? " " + ln : ""}` : null;
   };
 
-  const downloadVcard = () => {
-    
-  };
+  const downloadVcard = () => {};
 
   const sharingPage = () => {
     const title = `Let's Introduce ${getFullName()}`;
@@ -53,7 +51,7 @@ const Preview = () => {
         backgroundColor: pageDesign.logoBg,
         color: hasLightBG(pageDesign.mainBg) ? "#222" : "#eee",
       }}
-      // className="overflow-y-scroll"
+      // className="mx-auto"
     >
       <Helmet>
         <meta charset="UTF-8" />
@@ -73,7 +71,7 @@ const Preview = () => {
         <title>{`Let's Introduce ${getFullName()}`}</title>
       </Helmet>
 
-      <header>
+      <header className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
         <div id="topActions" style={{ display: "flex" }}>
           <div>
             <a id="share" onClick={sharingPage}>
@@ -112,6 +110,7 @@ const Preview = () => {
           backgroundColor: `${pageDesign.mainBg}`,
           marginTop: hasOnlyProfilePic ? "5rem" : "0",
         }}
+        className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl"
       >
         {images?.photo?.url && (
           <img
@@ -141,7 +140,7 @@ const Preview = () => {
 
         <a
           id="cta"
-          rel="noreferrer"
+          rel="noreferrer noopener"
           // href="!PreviewMode && `${username}.vcf`"
           download
           target="_blank"
@@ -276,7 +275,25 @@ const Preview = () => {
           );
         })}
       </main>
-      <footer></footer>
+      <footer class="mx-4 flex flex-col mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
+        <div class="flex flex-col justify-center items-center">
+          <p class="mb-2 text-center">Made with ❤️ by</p>
+          <p class="font-extrabold text-xl mt-2 leading-tight">
+            <a
+              href={window.location.host}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                className="w-6 h-6 mr-2 shrink-0 inline-block"
+                alt={"app logo"}
+                src={require(`../assets/icons/app-logo.svg?include`).default}
+              />
+              Let's Introduce
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

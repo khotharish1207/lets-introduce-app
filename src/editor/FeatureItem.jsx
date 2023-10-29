@@ -224,6 +224,7 @@ const FeatureItem = ({
                   className="w-12 h-12 bg-gray-900 flex items-center justify-center text-center text-xs rounded-l shrink-0 leading-none select-none cursor-pointer"
                   target="_blank"
                   href="https://duckduckgo.com/?q=Add+ID3+tags+to+mp3+file"
+                  rel="noreferrer noopener"
                 >
                   {item.info}
                 </a>

@@ -35,6 +35,7 @@ export default function Dashboard() {
                   className="text-blue-500"
                   href={`${window.location.origin}/${siteAvailable}`}
                   target="_blank"
+                  rel="noreferrer noopener"
                 >{`${window.location.origin}/${siteAvailable}`}</a>
               </p>
             ) : (

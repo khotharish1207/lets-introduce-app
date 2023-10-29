@@ -34,7 +34,7 @@ const SiteInfo = () => {
             className=" text-sky-700 "
             href={`${window.location.origin}/${endPoint}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >{`${window.location.origin}/${endPoint}`}</a>
         </p>
       </div>

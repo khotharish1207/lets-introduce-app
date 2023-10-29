@@ -38,12 +38,10 @@ const PrivateRoutes = () => {
 
 const AppRoutes = () => {
   const { loading } = useSelector((state) => state.app);
-  console.log("loading..", loading);
   return (
     <BrowserRouter>
       <Loader show={loading} />
       <Routes>
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/" element={<PrivateRoutes />}>
           <Route index path="/dashboard" element={<Dashboard />} />
           <Route path="/editor" element={<App />} />
