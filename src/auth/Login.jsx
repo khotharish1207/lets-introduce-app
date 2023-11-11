@@ -10,7 +10,7 @@ export default function Login() {
   const responseMessage = (response) => {
     console.log(response);
     const { credential } = response;
-    const { family_name, given_name, picture, email, ...k } =
+    const { family_name, given_name, picture, email } =
       parseJwt(credential);
 
     dispatch(getUser({ email, family_name, given_name, picture }));

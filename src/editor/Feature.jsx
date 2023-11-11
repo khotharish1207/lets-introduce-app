@@ -59,7 +59,10 @@ const Feature = () => {
             aria-label="Add section"
           >
             <div class="w-6 h-6">
-              <img src={require(`../assets/icons/add.svg?include`).default} />
+              <img
+                src={require(`../assets/icons/add.svg?include`).default}
+                alt="Add section"
+              />
             </div>
           </button>
           <p class="ml-3 leading-none">Add section</p>

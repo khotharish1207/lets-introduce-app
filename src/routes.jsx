@@ -1,18 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   BrowserRouter,
-  Route,
-  Routes,
   Navigate,
   Outlet,
+  Route,
+  Routes,
   useLocation,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Loader from "./components/Loader";
 import NavBar from "./components/NavBar";
 
 const App = React.lazy(() => import("./App"));
-const Preview = React.lazy(() => import("./preview/Preview"));
+// const Preview = React.lazy(() => import("./preview/Preview"));
 const Login = React.lazy(() => import("./auth/Login"));
 const PageNotFound = React.lazy(() => import("./components/PageNotFound"));
 const Site = React.lazy(() => import("./components/Site"));

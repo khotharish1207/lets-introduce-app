@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { getGreetMsg } from "../utils/index";
+
 
 export default function Dashboard() {
   const navigate = useNavigate();

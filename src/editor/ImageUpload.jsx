@@ -1,7 +1,7 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useState } from "react";
 // import ReactCrop from "react-image-crop";
 import { useDispatch, useSelector } from "react-redux";
-import { addImage, setImageAttr } from "../redux/reducer/images.reducer";
+import { setImageAttr } from "../redux/reducer/images.reducer";
 
 const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
   const selectedImage = useSelector((state) => state?.images?.[type] || {});

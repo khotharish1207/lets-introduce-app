@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import Preview from "./preview/Preview";
+import { useState } from "react";
 import Editor from "./editor/Editor";
+import Preview from "./preview/Preview";
 
 export default function App() {
   const [showPreview, togglePreview] = useState(false);
@@ -12,7 +12,10 @@ export default function App() {
         <div>
           <div className="w-full z-30 bg-gray-900 justify-between items-center flex md:hidden">
             <div className="logo w-16 m-4">
-              <img src={require("./assets/icons/drag.svg?include").default} />
+              <img
+                src={require("./assets/icons/drag.svg?include").default}
+                alt="Drag"
+              />
             </div>
             <button
               className={`p-3 mx-4 font-extrabold rounded tracking-wide focus:outline-none select-none ${

@@ -7,7 +7,6 @@ import { setContactInfo } from "../redux/reducer/contactInformation.reducer";
 const ContactInformation = () => {
   const { contactInformation } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const pubKeyIsValid = false;
 
   const onChange = (key) => (e) =>
     dispatch(
@@ -129,28 +128,6 @@ const ContactInformation = () => {
           value={contactInformation["desc"]}
           class="block mt-2 px-4 py-3 w-full bg-black rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
           rows="4"
-        ></textarea>
-      </div>
-
-      <div class="stepC relative mt-6">
-        <label for="pgp-public-key" class="flex justify-between ml-4">
-          OpenPGP public key
-          <span
-            v-if="genInfo.key"
-            class="mr-4"
-            class="pubKeyIsValid ? 'text-emerald-500' : 'text-red-600'"
-          >
-            {pubKeyIsValid ? "Valid" : "Invalid schema"}
-          </span>
-        </label>
-        <textarea
-          id="pgp-public-key"
-          onChange={onChange("key")}
-          value={contactInformation["key"]}
-          class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
-          rows="4"
-          spellcheck="false"
-          placeholder="Paste public key block here"
         ></textarea>
       </div>
     </div>

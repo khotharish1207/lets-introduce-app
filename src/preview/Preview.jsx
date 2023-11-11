@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
-import { getHref, hasLightBG, stripAttr } from "../utils";
+import { getHref, hasLightBG, stripAttr, saveContact } from "../utils";
 
 const Preview = () => {
   const {
@@ -11,6 +11,8 @@ const Preview = () => {
     actionItems: { primaryActions, secondaryActions },
     feature,
   } = useSelector((state) => state);
+
+  console.log({ primaryActions });
 
   const [hasOnlyProfilePic, setHasOnlyProfilePic] = useState(false);
 
@@ -23,7 +25,20 @@ const Preview = () => {
     return (fn + ln).length ? `${fn ? fn : ""}${ln ? " " + ln : ""}` : null;
   };
 
-  const downloadVcard = () => {};
+  const downloadVcard = () => {
+    const vCard = primaryActions.reduce((acc, obj) => {
+      acc[obj?.name?.toLowerCase()] = obj?.value || "";
+      return acc;
+    }, {});
+
+    console.log(vCard);
+
+    saveContact({
+      contactInformation,
+      vCard,
+      fullName: getFullName(),
+    });
+  };
 
   const sharingPage = () => {
     const title = `Let's Introduce ${getFullName()}`;
@@ -51,7 +66,6 @@ const Preview = () => {
         backgroundColor: pageDesign.logoBg,
         color: hasLightBG(pageDesign.mainBg) ? "#222" : "#eee",
       }}
-      // className="mx-auto"
     >
       <Helmet>
         <meta charset="UTF-8" />
@@ -72,18 +86,6 @@ const Preview = () => {
       </Helmet>
 
       <header className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
-        <div id="topActions" style={{ display: "flex" }}>
-          <div>
-            <a id="share" onClick={sharingPage}>
-              <div class="icon topAction">
-                <img
-                  alt="share"
-                  src={require(`../assets/icons/share.svg?include`).default}
-                />
-              </div>
-            </a>
-          </div>
-        </div>
         <div className="headerImgC">
           {images?.cover?.url && (
             <img id="cover" src={images.cover.url} alt="Background Pattern" />
@@ -138,24 +140,41 @@ const Preview = () => {
           </p>
         )}
 
-        <a
-          id="cta"
-          rel="noreferrer noopener"
-          // href="!PreviewMode && `${username}.vcf`"
-          download
-          target="_blank"
-          style={{ backgroundColor: pageDesign?.buttonBg }}
-          onClick={downloadVcard}
-          aria-label="Save Contact"
-        >
-          <div className="icon iconColor">
-            <img
-              alt="Save Contact"
-              src={require("../assets/icons/add-user.svg?include").default}
-            />
+        <div className="flex items-center w-4/5 mt-8">
+          <button
+            id="cta"
+            style={{ backgroundColor: pageDesign?.buttonBg }}
+            onClick={downloadVcard}
+            aria-label="Save Contact"
+          >
+            <div className="icon iconColor">
+              <img
+                alt="Save Contact"
+                src={require("../assets/icons/add-user.svg?include").default}
+              />
+            </div>
+            <p className="iconColor">Save Contact</p>
+          </button>
+          <div className="actionBtn">
+            <a
+              // href={getHref(actionItem)}
+              onClick={sharingPage}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                backgroundColor: pageDesign.buttonBg,
+              }}
+              aria-label="share"
+            >
+              <div className="icon iconColor">
+                <img
+                  alt="share"
+                  src={require(`../assets/icons/share.svg?include`).default}
+                />
+              </div>
+            </a>
           </div>
-          <p className="iconColor">Save Contact</p>
-        </a>
+        </div>
 
         <div className="actions">
           {primaryActions.map((actionItem, index) => (
@@ -252,7 +271,6 @@ const Preview = () => {
                   }
 
                   const embed = stripAttr(ctnt);
-                  console.log("embed", embed);
                   if (embed) {
                     return (
                       <div
