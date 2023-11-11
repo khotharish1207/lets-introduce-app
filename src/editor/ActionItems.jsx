@@ -132,7 +132,7 @@ const ActionItems = ({ title, actions, type }) => {
   );
 };
 
-export default function () {
+function Actions() {
   return (
     <React.Fragment>
       <ActionItems
@@ -148,3 +148,5 @@ export default function () {
     </React.Fragment>
   );
 }
+
+export default Actions;

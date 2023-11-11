@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   checkAvailability,
   setSite,
-  setInitialSite,
 } from "../reducer/site.reducer";
 import { setLoading } from "../reducer/app.reducer";
 import { API_URL } from "../../constants/appConstants";

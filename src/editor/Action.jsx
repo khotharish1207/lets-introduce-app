@@ -8,18 +8,21 @@ const Action = ({ item, type, buttonBg, onChange, removeAction }) => {
         tabindex="-1"
       >
         <div className="w-6 h-6">
-          <img src={require(`../assets/icons/drag.svg?include`).default} />
+          <img
+            src={require(`../assets/icons/drag.svg?include`).default}
+            alt="Drag"
+          />
         </div>
       </button>
       <div
         className="p-3 shrink-0 rounded-l"
         style={{
-          background: `${type == "secondaryActions" ? item.color : buttonBg}`,
+          background: `${type === "secondaryActions" ? item.color : buttonBg}`,
         }}
         title={item.name}
       >
         <div
-          className={`w-6 h-6 ${type == "secondaryActions" ? null : "action"}`}
+          className={`w-6 h-6 ${type === "secondaryActions" ? null : "action"}`}
         >
           <img
             alt={item.name}
@@ -49,7 +52,10 @@ const Action = ({ item, type, buttonBg, onChange, removeAction }) => {
         title="Remove field"
       >
         <div className="w-6 h-6">
-          <img src={require(`../assets/icons/x.svg?include`).default} />
+          <img
+            src={require(`../assets/icons/x.svg?include`).default}
+            alt="Remove field"
+          />
         </div>
       </button>
     </div>

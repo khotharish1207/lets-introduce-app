@@ -1,3 +1,5 @@
+import { saveAs } from "file-saver";
+
 export const hasLightBG = (hex) => {
   hex = hex.slice(1);
   if (hex.length === 3) {
@@ -101,7 +103,7 @@ export const getGreetMsg = () => {
   switch (true) {
     case hours >= 5 && hours <= 11:
       return `Hello! Good Morning! Have a nice day`;
-    case hours == 12:
+    case hours === 12:
       return "Good Noon Visitor!";
     case hours >= 13 && hours <= 17:
       return "Good Afternoon!";
@@ -112,4 +114,26 @@ export const getGreetMsg = () => {
     default:
       return "Wow! You`re still awake. Working Late?";
   }
+};
+
+export const saveContact = ({ contactInformation, vCard, fullName }) => {
+  const vcardTemplate = `
+BEGIN:VCARD
+VERSION:3.0
+N:${contactInformation?.fname || ""}
+FN:${fullName}
+ORG:${contactInformation?.org || ""}
+ADR;TYPE=WORK:${contactInformation?.addr || ""}
+TITLE:${contactInformation?.title || ""}
+TEL;TYPE=CELL:${vCard?.cell}
+TEL;TYPE=WORK:${vCard?.work}
+TEL;TYPE=HOME:${vCard?.home}
+TEL;TYPE=MSG:${vCard?.sms}
+END:VCARD
+  `;
+
+  const blob = new Blob([vcardTemplate], {
+    type: "text/plain",
+  });
+  saveAs(window.URL.createObjectURL(blob), `${fullName}.vcf`);
 };

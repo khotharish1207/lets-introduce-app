@@ -1,7 +1,6 @@
-import React, { createRef, useState } from "react";
 import pdfjs from "pdfjs-dist";
-
-import { mediaType, getFileName, formatBytes, dataURIToBinary } from "../utils";
+import React, { createRef, useState } from "react";
+import { dataURIToBinary, formatBytes, getFileName, mediaType } from "../utils";
 
 const FeatureItem = ({
   feature,
@@ -49,8 +48,8 @@ const FeatureItem = ({
     reader.readAsDataURL(file);
   };
 
-  const musicLoaded = () => {};
-  const videoLoaded = () => {};
+  // const musicLoaded = () => {};
+  // const videoLoaded = () => {};
 
   const documentLoaded = (file, type) => {
     let filesize = formatBytes(file.size);
@@ -159,7 +158,10 @@ const FeatureItem = ({
             tabindex="-1"
           >
             <div className="w-6 h-6">
-              <img src={require(`../assets/icons/drag.svg?include`).default} />
+              <img
+                src={require(`../assets/icons/drag.svg?include`).default}
+                alt="Drag"
+              />
             </div>
           </div>
           <div className="w-full">
@@ -182,7 +184,10 @@ const FeatureItem = ({
           title="Remove section"
         >
           <div className="w-6 h-6">
-            <img src={require(`../assets/icons/x.svg?include`).default} />
+            <img
+              src={require(`../assets/icons/x.svg?include`).default}
+              alt="Remove section"
+            />
           </div>
         </button>
       </div>
@@ -191,7 +196,7 @@ const FeatureItem = ({
         <pre>{JSON.stringify(item, null, 4)}</pre>;
         if (item.contentType === "media") {
           let showImage =
-            item.type == "image"
+            item.type === "image"
               ? item.dataURI
               : item.coverDataURI
               ? item.coverDataURI
@@ -216,7 +221,7 @@ const FeatureItem = ({
               {showImage ? (
                 <img
                   className="w-12 h-12 rounded-l object-contain shrink-0 bg-gray-700"
-                  src={item.type == "image" ? item.dataURI : item.coverDataURI}
+                  src={item.type === "image" ? item.dataURI : item.coverDataURI}
                   alt={item.title}
                 />
               ) : (
@@ -380,7 +385,10 @@ const FeatureItem = ({
             onClick={(e) => (e.target.files = null)}
           />
           <div className="w-6 h-6 mr-3">
-            <img src={require(`../assets/icons/file.svg?include`).default} />
+            <img
+              src={require(`../assets/icons/file.svg?include`).default}
+              alt="Add media"
+            />
           </div>
           <p className="leading-none">Add media</p>
         </button>
@@ -391,7 +399,10 @@ const FeatureItem = ({
           aria-label="Add text"
         >
           <div className="w-6 h-6 mr-3">
-            <img src={require(`../assets/icons/text.svg?include`).default} />
+            <img
+              src={require(`../assets/icons/text.svg?include`).default}
+              alt="Add text"
+            />
           </div>
           <p className="leading-none text-left">Add text</p>
         </button>
