@@ -117,7 +117,6 @@ export const getGreetMsg = () => {
 };
 
 export const saveContact = ({ contactInformation, vCard, fullName }) => {
-  console.log(vCard);
   const vcardTemplate = `
 BEGIN:VCARD
 VERSION:3.0
@@ -136,5 +135,5 @@ END:VCARD
   const blob = new Blob([vcardTemplate], {
     type: "text/vcard",
   });
-  // saveAs(window.URL.createObjectURL(blob), `${fullName}.vcf`);
+  saveAs(window.URL.createObjectURL(blob), `${fullName}.vcf`);
 };
