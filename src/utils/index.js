@@ -133,7 +133,7 @@ END:VCARD
   `;
 
   const blob = new Blob([vcardTemplate], {
-    type: "text/plain",
+    type: "text/vcard",
   });
   saveAs(window.URL.createObjectURL(blob), `${fullName}.vcf`);
 };
