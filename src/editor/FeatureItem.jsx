@@ -1,5 +1,7 @@
 import pdfjs, { getDocument } from "pdfjs-dist";
 import React, { createRef, useState } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { dataURIToBinary, formatBytes, getFileName, mediaType } from "../utils";
 
 const FeatureItem = ({
@@ -9,9 +11,17 @@ const FeatureItem = ({
   removeContent,
   onChange,
   onTitleChange,
+  ...props
 }) => {
   const importRef = createRef();
   const [dragOver, setDragOver] = useState(false);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: props.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const hasContent = true;
 
@@ -150,12 +160,18 @@ const FeatureItem = ({
   const addLink = () => addContent("");
 
   return (
-    <div className="flex flex-col w-full my-6 bg-gray-800 rounded">
+    <div
+      className="flex flex-col w-full my-6 bg-gray-800 rounded"
+      ref={setNodeRef}
+    >
       <div className="flex justify-between">
         <div className="flex items-center w-full">
           <div
             className="p-1 shrink-0 focus:outline-none drag cursor-move"
             tabindex="-1"
+            style={style}
+            {...attributes}
+            {...listeners}
           >
             <div className="w-6 h-6">
               <img

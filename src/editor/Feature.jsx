@@ -1,5 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 import FeatureItem from "./FeatureItem";
 
@@ -10,9 +25,18 @@ import {
   setContent,
   removeContent,
   setFeatureTitle,
+  setInitialFeatures,
 } from "../redux/reducer/feature.reducer";
 
 const Feature = () => {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+  const [activeId, setActiveId] = useState(null);
+
   const { feature } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -36,20 +60,57 @@ const Feature = () => {
       })
     );
 
+  const handleDragStart = (event) => {
+    const { active } = event;
+    setActiveId(active.id);
+  };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = active.id;
+      const newIndex = over.id;
+
+      const items = arrayMove(feature, oldIndex, newIndex);
+      dispatch(setInitialFeatures(items));
+    }
+
+    setActiveId(null);
+  };
+
+  console.log(feature);
+
   return (
     <div id="step-5" class="my-8">
       <h2 class="font-extrabold text-2xl">Featured content</h2>
       <div class="stepC">
-        {feature.map((item, index) => (
-          <FeatureItem
-            feature={item}
-            removeFeature={removeFeature(index)}
-            addContent={addContentFeature(index)}
-            removeContent={removeContentFeature(index)}
-            onChange={setContentValue(index)}
-            onTitleChange={updateFeatureTitle(index)}
-          />
-        ))}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={feature}
+            strategy={verticalListSortingStrategy}
+          >
+            {feature.map((item, index) => (
+              <FeatureItem
+                feature={item}
+                id={index}
+                removeFeature={removeFeature(index)}
+                addContent={addContentFeature(index)}
+                removeContent={removeContentFeature(index)}
+                onChange={setContentValue(index)}
+                onTitleChange={updateFeatureTitle(index)}
+              />
+            ))}
+          </SortableContext>
+          <DragOverlay>
+            {activeId ? <FeatureItem feature={feature[activeId]} /> : null}
+          </DragOverlay>
+        </DndContext>
       </div>
       <div class="flex mt-6">
         <div class="flex flex-wrap items-center">

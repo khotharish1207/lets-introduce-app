@@ -12,8 +12,6 @@ const Preview = ({ site }) => {
     feature,
   } = useSelector((state) => state);
 
-  console.log({ primaryActions });
-
   const [hasOnlyProfilePic, setHasOnlyProfilePic] = useState(false);
 
   useEffect(() => {
