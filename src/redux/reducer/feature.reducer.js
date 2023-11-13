@@ -43,7 +43,7 @@ export const featureSlice = createSlice({
         : value;
     },
     setInitialFeatures: (state, { payload }) => {
-      return [...state, ...payload];
+      return [...payload];
     },
   },
 });
