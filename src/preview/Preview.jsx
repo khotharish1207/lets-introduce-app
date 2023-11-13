@@ -62,9 +62,11 @@ const Preview = () => {
   return (
     <div
       lang="en"
+      id={pageDesign.theme}
       style={{
         backgroundColor: pageDesign.logoBg,
         color: hasLightBG(pageDesign.mainBg) ? "#222" : "#eee",
+        fontFamily: `${pageDesign?.fontLink}, serif`,
       }}
     >
       <Helmet>
@@ -72,7 +74,6 @@ const Preview = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="author" content="Let's Introduce" />
-        {/* <meta name="url" content="https://enbizcard.vishnuraghav.com/" /> */}
         <meta name="designer" content="Let's Introduce" />
         <meta
           property="og:title"
@@ -83,6 +84,17 @@ const Preview = () => {
           content={`Let's Introduce ${getFullName()}`}
         />
         <title>{`Let's Introduce ${getFullName()}`}</title>
+        <link
+          rel="stylesheet"
+          href={`https://fonts.googleapis.com/css?family=${pageDesign?.fontLink}`}
+        ></link>
+        <style type="text/css">{`
+          .iconColor{ 
+            color:#eee; 
+            ${hasLightBG(pageDesign?.buttonBg) ? "filter:invert(1)" : null}
+           }
+          
+          `}</style>
       </Helmet>
 
       <header className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
@@ -141,8 +153,11 @@ const Preview = () => {
         )}
 
         <div className="flex items-center w-4/5 mt-8">
-          <button
+          <a
             id="cta"
+            rel="noreferrer noopener"
+            download
+            target="_blank"
             style={{ backgroundColor: pageDesign?.buttonBg }}
             onClick={downloadVcard}
             aria-label="Save Contact"
@@ -154,7 +169,7 @@ const Preview = () => {
               />
             </div>
             <p className="iconColor">Save Contact</p>
-          </button>
+          </a>
           <div className="actionBtn">
             <a
               // href={getHref(actionItem)}

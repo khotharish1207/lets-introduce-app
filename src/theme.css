@@ -188,7 +188,7 @@ main {
   display: flex;
   align-items: center;
   border-radius: 5rem;
-  
+
   padding: 1rem 1.5rem;
   cursor: pointer;
   line-height: 0;
@@ -429,4 +429,36 @@ footer a {
 .list-enter {
   transform: translateY(0.5rem);
   opacity: 0;
+}
+
+/*
+  theme 2 changes
+*/
+
+#theme2 .label {
+  border-radius: 0.5rem;
+}
+#theme2 #dlKey {
+  border-radius: 0.5rem;
+}
+#theme2 .headerImgC {
+  height: 100%;
+}
+#theme2 #profilePhoto {
+  border-radius: 0.5rem;
+}
+#theme2 .bizname {
+  margin: 0.5rem 0 0 0;
+}
+#theme2 #cta {
+  border-radius: 0.5rem;
+}
+#theme2 .actionBtn a {
+  border-radius: 0.5rem;
+}
+#theme2 .media {
+  border-radius: 0.5rem;
+}
+#theme2 .dlBtn {
+  border-radius: 0.5rem;
 }

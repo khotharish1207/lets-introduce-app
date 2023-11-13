@@ -7,6 +7,7 @@ const initialState = {
   cardBg: `#fff`,
   fontLink: "",
   fontCss: "",
+  theme: "theme1",
 };
 
 export const pageDesignSlice = createSlice({
