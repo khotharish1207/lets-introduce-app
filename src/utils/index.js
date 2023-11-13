@@ -18,9 +18,13 @@ export const getHref = (e) => {
   let value = null;
   if (e.name === "Viber" && e.value)
     value = e.value.replace(/[\s\-()]/g, "").replace(/\+/, "%2B");
-  return e.href
+  const URL = e.href
     ? e.href + (value || e.value) + (e.hrefEnd ? e.hrefEnd : "")
     : value || e.value;
+  if (e?.isURL && !URL?.startsWith("http") && (value || e.value)) {
+    return `https://${URL}`;
+  }
+  return URL;
 };
 
 export const parseJwt = (token) => {

@@ -31,6 +31,9 @@ const PageDesign = () => {
   const onChange = (name) => (e) =>
     dispatch(setPageDesign({ key: name, value: e.target.value }));
 
+  const setTheme = (theme) =>
+    dispatch(setPageDesign({ key: "theme", value: theme }));
+
   return (
     <React.Fragment>
       <div id="step-8" className="my-8">
@@ -57,25 +60,51 @@ const PageDesign = () => {
         />
       </div>
 
+      <div id="step-7" class="mt-16">
+        <h2 class="font-extrabold text-2xl">Themes</h2>
+        <div class="stepC mt-3 flex flex-wrap">
+          <button
+            onClick={() => setTheme("theme1")}
+            className={`w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200 ${
+              pageDesign?.theme == "theme1"
+                ? "bg-emerald-600"
+                : "bg-gray-700 hover:bg-gray-600 focus:bg-gray-600"
+            }`}
+          >
+            A
+          </button>
+          <button
+            onClick={() => setTheme("theme2")}
+            className={`w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200 ${
+              pageDesign?.theme == "theme2"
+                ? "bg-emerald-600"
+                : "bg-gray-700 hover:bg-gray-600 focus:bg-gray-600"
+            }`}
+          >
+            B
+          </button>
+        </div>
+      </div>
+
       <div id="step-8" className="mt-16">
         <h2 className="font-extrabold text-2xl">Fonts</h2>
 
         <div className="stepC mt-6">
           <label for="font-link" className="ml-4">
-            Web font embed code
+            Google web font name
           </label>
-          <textarea
+          <input
             id="font-link"
             value={pageDesign.fontLink}
             onChange={onChange("fontLink")}
             className="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
             rows="4"
             spellcheck="false"
-            placeholder={`<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">`}
-          ></textarea>
+            placeholder="Google font name"
+          ></input>
         </div>
 
-        <div class="stepC mt-6">
+        {/* <div class="stepC mt-6">
           <label for="font-css" class="ml-4">
             Web font CSS rule
           </label>
@@ -89,12 +118,18 @@ const PageDesign = () => {
             class="block mt-2 px-4 py-3 w-full bg-black placeholder-gray-600 rounded border border-transparent transition-colors duration-200 focus:outline-none focus:border-gray-600 resize-none hover:border-gray-600"
             placeholder={`font-family: 'Poppins', sans-serif;`}
           />
-        </div>
+        </div> */}
       </div>
       <p className="mt-6 border p-4 rounded border-gray-700 text-gray-400">
-        Supports services such as Google Fonts, Adobe Typekit, etc. Make sure to
-        get the embed code for both regular and bold font variants from the same
-        font family.
+        Supports services such as Google Fonts. Make sure to get the corect font
+        name from these{" "}
+        <a
+          className=" text-sky-700 underline"
+          href="https://fonts.google.com/"
+          target="_blank"
+        >
+          fonts
+        </a>
       </p>
     </React.Fragment>
   );
