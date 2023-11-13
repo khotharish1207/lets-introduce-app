@@ -310,7 +310,11 @@ const Preview = ({ site }) => {
           );
         })}
       </main>
-      <footer class="mx-4 flex flex-col mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
+      <footer
+        class={`mx-4 flex flex-col mx-auto shadow-xl ${
+          site ? "md:w-4/6 lg:w-3/6" : ""
+        }`}
+      >
         <div class="flex flex-col justify-center items-center">
           <p class="mb-2 text-center">Made with ❤️ by</p>
           <p class="font-extrabold text-xl mt-2 leading-tight">
