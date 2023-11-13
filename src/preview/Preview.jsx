@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { getHref, hasLightBG, stripAttr, saveContact } from "../utils";
 
-const Preview = () => {
+const Preview = ({ site }) => {
   const {
     images,
     pageDesign,
@@ -97,7 +97,9 @@ const Preview = () => {
           `}</style>
       </Helmet>
 
-      <header className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl">
+      <header
+        className={`mx-auto shadow-xl ${site ? "md:w-4/6 lg:w-3/6" : ""}`}
+      >
         <div className="headerImgC">
           {images?.cover?.url && (
             <img id="cover" src={images.cover.url} alt="Background Pattern" />
@@ -124,7 +126,7 @@ const Preview = () => {
           backgroundColor: `${pageDesign.mainBg}`,
           marginTop: hasOnlyProfilePic ? "5rem" : "0",
         }}
-        className="mx-auto md:w-4/6 lg:w-3/6 shadow-xl"
+        className={`mx-auto shadow-xl ${site ? "md:w-4/6 lg:w-3/6" : ""}`}
       >
         {images?.photo?.url && (
           <img
