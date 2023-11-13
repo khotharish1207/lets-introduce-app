@@ -28,7 +28,7 @@ export default function App() {
           </div>
           {showPreview && !belowMDscreen ? (
             <div className="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900">
-              <Preview className="rounded-b-2xl" />
+              <Preview />
             </div>
           ) : (
             <Editor />
@@ -49,7 +49,7 @@ export default function App() {
               </h2>
 
               <div className="overflow-y-scroll max-hd border-t-0 border-4 border-black bg-gray-900">
-                <Preview className="rounded-b-2xl" />
+                <Preview />
               </div>
             </div>
           </div>

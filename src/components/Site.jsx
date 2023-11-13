@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import Preview from "../preview/Preview";
 import { getSite } from "../redux/reducer/site.reducer";
 
-
 const Site = () => {
   const dispatch = useDispatch();
   const { site } = useParams();
@@ -13,7 +12,7 @@ const Site = () => {
     dispatch(getSite(site));
   }, []);
 
-  return <Preview />;
+  return <Preview site />;
 };
 
 export default Site;
