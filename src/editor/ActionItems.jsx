@@ -1,11 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 import appConstants from "../constants/appConstants";
 import {
   addActionItem,
   removeActionItem,
   onActionEdit,
+  setActionItemsbyType,
 } from "../redux/reducer/actionItems.reducer";
 
 import Action from "./Action";
@@ -15,6 +31,14 @@ const {
 } = appConstants;
 
 const ActionItems = ({ title, actions, type }) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+  const [activeId, setActiveId] = useState(null);
+
   const actionItems = useSelector((state) => state?.actionItems?.[type] || []);
   const dispatch = useDispatch();
 
@@ -48,23 +72,67 @@ const ActionItems = ({ title, actions, type }) => {
     dispatch(removeActionItem({ actionType, value: index }));
   };
 
+  const handleDragStart = (event) => {
+    const { active } = event;
+    setActiveId(actionItems.findIndex((n) => n.name === active.id));
+  };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = actionItems.findIndex((n) => n.name === active.id);
+      const newIndex = actionItems.findIndex((n) => n.name === over.id);
+
+      const items = arrayMove(actionItems, oldIndex, newIndex);
+      dispatch(
+        setActionItemsbyType({
+          type,
+          items,
+        })
+      );
+    }
+
+    setActiveId(null);
+  };
+
   return (
     <div id="step-3" className="mt-16">
       <h2 className="font-extrabold text-2xl">{title}</h2>
-      {/* TODO: draggable items */}
-      <div draggable animation="1" ghostClass="ghost">
-        {actionItems.map((actionItem, index) => (
-          <Action
-            item={actionItem}
-            type={type}
-            buttonBg={"transparent"}
-            removeAction={onRemoveAction(index)}
-            onChange={(value) =>
-              dispatch(onActionEdit({ actionType: type, value, index }))
-            }
-          />
-        ))}
-      </div>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+      >
+        <SortableContext
+          items={actionItems}
+          strategy={verticalListSortingStrategy}
+        >
+          {actionItems.map((actionItem, index) => (
+            <Action
+              item={actionItem}
+              id={actionItem.name}
+              type={type}
+              buttonBg={"transparent"}
+              removeAction={onRemoveAction(index)}
+              onChange={(value) =>
+                dispatch(onActionEdit({ actionType: type, value, index }))
+              }
+            />
+          ))}
+        </SortableContext>
+        <DragOverlay>
+          {activeId ? (
+            <Action
+              id={activeId}
+              item={actionItems[activeId]}
+              id={actionItems[activeId].name}
+              buttonBg={"transparent"}
+            />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
 
       <div
         className={`mt-6 border-gray-800 ${

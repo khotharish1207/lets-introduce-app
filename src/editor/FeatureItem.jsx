@@ -1,4 +1,4 @@
-import pdfjs from "pdfjs-dist";
+import pdfjs, { getDocument } from "pdfjs-dist";
 import React, { createRef, useState } from "react";
 import { dataURIToBinary, formatBytes, getFileName, mediaType } from "../utils";
 
@@ -59,7 +59,7 @@ const FeatureItem = ({
     maxWidth = maxHeight = 1296;
     reader.onload = (f) => {
       data = dataURIToBinary(f.target.result);
-      let loadingTask = pdfjs.getDocument(data);
+      let loadingTask = getDocument(data);
       loadingTask.promise.then((pdf) => {
         pdf.getPage(1).then((page) => {
           let canvas = document.createElement("canvas");
@@ -379,7 +379,8 @@ const FeatureItem = ({
               display: "none",
             }}
             type="file"
-            accept="mimetypes"
+            // accept="mimetypes"
+            accept="image/*"
             v-show="false"
             onChange={(e) => fileLoaded(e, false)}
             onClick={(e) => (e.target.files = null)}

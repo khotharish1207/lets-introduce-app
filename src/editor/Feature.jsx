@@ -68,6 +68,10 @@ const Feature = () => {
           <p class="ml-3 leading-none">Add section</p>
         </div>
       </div>
+
+      <p className="mt-6 border p-4 rounded border-gray-700 text-gray-400">
+        Media is supporting for images only as of now.
+      </p>
     </div>
   );
 };

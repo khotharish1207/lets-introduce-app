@@ -66,7 +66,7 @@ const PageDesign = () => {
           <button
             onClick={() => setTheme("theme1")}
             className={`w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200 ${
-              pageDesign?.theme == "theme1"
+              pageDesign?.theme === "theme1"
                 ? "bg-emerald-600"
                 : "bg-gray-700 hover:bg-gray-600 focus:bg-gray-600"
             }`}
@@ -76,7 +76,7 @@ const PageDesign = () => {
           <button
             onClick={() => setTheme("theme2")}
             className={`w-12 h-12 rounded mt-3 mr-3 font-extrabold focus:outline-none transition-colors duration-200 ${
-              pageDesign?.theme == "theme2"
+              pageDesign?.theme === "theme2"
                 ? "bg-emerald-600"
                 : "bg-gray-700 hover:bg-gray-600 focus:bg-gray-600"
             }`}
@@ -126,7 +126,7 @@ const PageDesign = () => {
         <a
           className=" text-sky-700 underline"
           href="https://fonts.google.com/"
-          target="_blank"
+          target="_blank"  rel="noreferrer noopener "
         >
           fonts
         </a>

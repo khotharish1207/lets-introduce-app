@@ -22,11 +22,20 @@ export const actionItemsSlice = createSlice({
     setActionItems: (state, { payload }) => {
       return { ...state, ...payload };
     },
+    setActionItemsbyType: (state, { payload }) => {
+      const { type, items } = payload;
+      return { ...state, [type]: items };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addActionItem, removeActionItem, onActionEdit, setActionItems } =
-  actionItemsSlice.actions;
+export const {
+  addActionItem,
+  removeActionItem,
+  onActionEdit,
+  setActionItems,
+  setActionItemsbyType,
+} = actionItemsSlice.actions;
 
 export default actionItemsSlice.reducer;

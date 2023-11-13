@@ -1,11 +1,26 @@
 import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-const Action = ({ item, type, buttonBg, onChange, removeAction }) => {
+const Action = ({ item, type, buttonBg, onChange, removeAction, ...props }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: props.id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
-    <div className="stepC flex mt-6 mb-4">
+    <div className="stepC flex mt-6 mb-4" ref={setNodeRef}>
       <button
         className="py-1 pr-1 shrink-0 focus:outline-none drag cursor-move"
         tabindex="-1"
+        style={style}
+        {...attributes}
+        {...listeners}
       >
         <div className="w-6 h-6">
           <img
