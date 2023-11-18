@@ -21,6 +21,7 @@ import FeatureItem from "./FeatureItem";
 import {
   addFeature,
   deleteFeature,
+  initializeContent,
   addContent,
   setContent,
   removeContent,
@@ -44,6 +45,9 @@ const Feature = () => {
   const removeFeature = (index) => () => dispatch(deleteFeature(index));
   const updateFeatureTitle = (index) => (title) =>
     dispatch(setFeatureTitle({ index, title }));
+
+  const initializeFeatureContent = (index) => (content) =>
+    dispatch(initializeContent({ index, content }));
 
   const addContentFeature = (index) => (content) =>
     dispatch(addContent({ index, content }));
@@ -102,6 +106,7 @@ const Feature = () => {
                 removeFeature={removeFeature(index)}
                 addContent={addContentFeature(index)}
                 removeContent={removeContentFeature(index)}
+                initializeContent={initializeFeatureContent(index)}
                 onChange={setContentValue(index)}
                 onTitleChange={updateFeatureTitle(index)}
               />

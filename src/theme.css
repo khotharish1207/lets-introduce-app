@@ -23,6 +23,10 @@ a {
   user-select: none;
 }
 
+.drag {
+  touch-action: none;
+}
+
 #modal {
   display: flex;
   flex-direction: column;

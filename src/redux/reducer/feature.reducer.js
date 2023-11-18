@@ -20,6 +20,10 @@ export const featureSlice = createSlice({
       const { title, index } = payload;
       state[index].title = title;
     },
+    initializeContent: (state, { payload }) => {
+      const { content, index } = payload;
+      state[index].content = content;
+    },
     addContent: (state, { payload }) => {
       const { content, index } = payload;
       state[index].content.push(content);
@@ -53,6 +57,7 @@ export const {
   addFeature,
   deleteFeature,
   setInitialFeatures,
+  initializeContent,
   addContent,
   setContent,
   removeContent,
