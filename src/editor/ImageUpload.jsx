@@ -1,7 +1,7 @@
 import React, { createRef, useState } from "react";
-// import ReactCrop from "react-image-crop";
 import { useDispatch, useSelector } from "react-redux";
 import { setImageAttr } from "../redux/reducer/images.reducer";
+import Cropper from "./Cropper";
 
 const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
   const selectedImage = useSelector((state) => state?.images?.[type] || {});
@@ -11,13 +11,7 @@ const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
   const [tempURL, setTempURL] = useState(false);
   const [mime, setMime] = useState(false);
   const [filetype, setFiletype] = useState(false);
-
-  // const [showCropper, setShowCropper] = useState(false);
-  // const [crop, setCrop] = useState();
-
-  // useEffect(() => {
-  //   dispatch(addImage(type));
-  // }, []);
+  const [showCropper, setShowCropper] = useState(false);
 
   const setContent = (value) =>
     dispatch(
@@ -90,7 +84,7 @@ const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
         // setContent({ ...fileContent, ext });
         setFiletype(type);
         setMime(mime);
-        // setShowCropper(true);
+        setShowCropper(true);
         setTempURL(dataURI);
 
         setContent({
@@ -105,23 +99,29 @@ const ImageUpload = ({ type, label, description, showAlert, resizeImage }) => {
     reader.readAsDataURL(file);
   };
 
+  const onCropCancel = () => {
+    setTempURL(null);
+    setContent({ url: null });
+    setShowCropper(false);
+  };
+
+  const onCropComplete = (url) => {
+    setContent({ ...selectedImage, url });
+    setShowCropper(false);
+  };
+
   return (
     <div class="flex my-6">
-      <transition name="list">
-        {/* {showCropper && (
-          <ReactCrop
-            crop={crop}
-            onChange={(c) => {
-              console.log("change", c);
-              setCrop(c);
-            }}
-            onComplete={console.log}
-            aspect
-          >
-            <img src={tempURL} />
-          </ReactCrop>
-        )} */}
-      </transition>
+      {showCropper && (
+        <Cropper
+          src={tempURL}
+          onCancel={onCropCancel}
+          onComplete={onCropComplete}
+          type={type}
+          mime={mime}
+        />
+      )}
+
       <div class="flex flex-wrap items-center">
         {imageAttached() && (
           <img

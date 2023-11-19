@@ -10,7 +10,6 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }) => {
-      console.log("payload", payload);
       state.user = { ...payload };
     },
     setLoading: (state, { payload }) => {

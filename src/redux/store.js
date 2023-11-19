@@ -25,7 +25,13 @@ export const store = configureStore({
     feature,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these field paths in all actions
+        ignoreActions: true,
+        ignoreState: true,
+      },
+    }).concat(sagaMiddleware),
 });
 
 // then run the saga
