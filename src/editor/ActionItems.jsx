@@ -125,7 +125,6 @@ const ActionItems = ({ title, actions, type }) => {
         <DragOverlay>
           {activeId ? (
             <Action
-              id={activeId}
               item={actionItems[activeId]}
               id={actionItems[activeId].name}
               buttonBg={"transparent"}

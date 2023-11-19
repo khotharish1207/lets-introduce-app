@@ -9,6 +9,8 @@ import reportWebVitals from "./reportWebVitals";
 import Routes from "./routes";
 import "./theme.css";
 
+import "react-image-crop/dist/ReactCrop.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const cid2 =

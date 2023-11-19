@@ -8,7 +8,6 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const responseMessage = (response) => {
-    console.log(response);
     const { credential } = response;
     const { family_name, given_name, picture, email } =
       parseJwt(credential);

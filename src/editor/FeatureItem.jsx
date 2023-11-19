@@ -183,8 +183,6 @@ const FeatureItem = ({
 
   const addLink = () => addContent("");
 
-  console.log("features", feature);
-
   return (
     <div
       className="flex flex-col w-full my-6 bg-gray-800 rounded"

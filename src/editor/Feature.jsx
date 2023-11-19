@@ -83,8 +83,6 @@ const Feature = () => {
     setActiveId(null);
   };
 
-  console.log(feature);
-
   return (
     <div id="step-5" class="my-8">
       <h2 class="font-extrabold text-2xl">Featured content</h2>
